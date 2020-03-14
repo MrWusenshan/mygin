@@ -11,7 +11,7 @@ import (
 )
 
 func Register(ctx *gin.Context) {
-	db := common.GetDBEngine()
+	DB := common.GetDBEngine()
 
 	name := ctx.PostForm("name")
 	telephone := ctx.PostForm("telephone")
@@ -42,7 +42,7 @@ func Register(ctx *gin.Context) {
 
 	log.Println(name, telephone, password)
 	//判断手机号是否存在
-	if isTelephoneExist(db, telephone) {
+	if isTelephoneExist(DB, telephone) {
 		ctx.JSON(http.StatusUnprocessableEntity, gin.H{
 			"code":    422,
 			"message": "该手机号已注册",
@@ -57,7 +57,7 @@ func Register(ctx *gin.Context) {
 		Telephone: telephone,
 		Password:  password,
 	}
-	db.Create(&newUser)
+	DB.Create(&newUser)
 
 	ctx.JSON(http.StatusOK, gin.H{
 		"code":    200,

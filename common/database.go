@@ -32,7 +32,7 @@ func InitDB() *gorm.DB {
 	}
 
 	db.AutoMigrate(&modle.User{})
-
+	DB = db
 	return db
 }
 

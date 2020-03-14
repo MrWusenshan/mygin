@@ -7,12 +7,11 @@ import (
 )
 
 func main() {
-	db := common.GetDBEngine()
+	db := common.InitDB()
 	defer db.Close()
 
 	app := gin.Default()
 	app = router.CollectRouter(app)
-
 
 	app.Run() // listen and serve on 0.0.0.0:8080
 }
