@@ -6,7 +6,6 @@ import (
 	"log"
 	"mygin/common"
 	"mygin/modle"
-	"mygin/orm"
 	"mygin/util"
 	"net/http"
 )
@@ -68,7 +67,7 @@ func Register(ctx *gin.Context) {
 }
 
 func isTelephoneExist(db *gorm.DB, telephone string) bool {
-	var user orm.User
+	var user modle.User
 	db.Where("telephone = ?", telephone).First(&user)
 	if user.ID != 0 {
 		return true
